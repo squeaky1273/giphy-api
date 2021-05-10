@@ -3,5 +3,34 @@
     <head>
         <title>Giphy</title>
     </head>
-    <body></body>
+    <body>
+        <div class="container">
+            <form id="search-form">
+                <input id="search-input" type="text" placeholder="search">
+                <button type="submit">Search</button>
+            </form>
+            <div id="results" class="results">
+                <!-- gif images here -->
+            </div>
+        </div>
+        <script type="module">
+            import { getGifByTerm } from './index.js'
+
+            const searchForm = document.getElementById('search-form')
+            const searchInput = document.getElementById('search-input')
+            const resultsEl = document.getElementById('results')
+
+            // Define event listeners
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+                const q = searchInput.value
+                const apiKey = process.env.GIPHY_API_KEY
+            
+                getGifByTerm(apiKey, q).then((data) => {
+                    console.log(data)
+                    resultsEl.innerHTML = data.resultsHTML
+                }).catch(err => console.log(err.message))
+            })
+        </script>
+    </body>
 </html>
