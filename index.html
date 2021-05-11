@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Giphy</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div class="container">
+            <header>
+                <h1>Giphy Search</h1>
+            </header>
             <form id="search-form">
                 <input id="search-input" type="text" placeholder="search">
                 <button type="submit">Search</button>
@@ -23,12 +30,13 @@
             // Define event listeners
             searchForm.addEventListener('submit', (e) => {
                 e.preventDefault()
+                console.log('hello')
                 const q = searchInput.value
-                const apiKey = process.env.GIPHY_API_KEY
+                const apiKey = 'AO494tEsU7J485MBG9k0EPeCbpXpporV'
             
                 getGifByTerm(apiKey, q).then((data) => {
                     console.log(data)
-                    resultsEl.innerHTML = data.resultsHTML
+                    resultsEl.innerHTML = `<img src="${data.url}" width="${data.width}" height="${data.height}" alt="${data.title}">`
                 }).catch(err => console.log(err.message))
             })
         </script>

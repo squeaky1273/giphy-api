@@ -6,16 +6,16 @@ function getGifByTerm(apikey, q) {
 async function getGif(path) {
     try {
         const res = await fetch(path)
-        const data = await res.json()
+        const json = await res.json()
 
         const gifData = {
-            url: data.images.fixed_width.url,
-            width: data.images.fixed_width.width,
-            height: data.images.fixed_width.height,
-            title: data.title,
-            resultsHTML: `<img src="${url}" width="${width}" height="${height}" alt="${title}">`
+            url: json.data[0].images.fixed_width.url,
+            width: json.data[0].images.fixed_width.width,
+            height: json.data[0].images.fixed_width.height,
+            title: json.data[0].title
         }
         return gifData
+        // console.log(gifData)
     } catch(err) {
         // handle error here
         return err
